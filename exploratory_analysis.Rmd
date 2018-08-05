@@ -1,0 +1,31 @@
+---
+title: "Exploratory Analysis"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: bootstrap
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rio)
+library(corrplot)
+
+##Get the Data
+data_original<-rio::import("C:/Academic/Capstone/capstone_caravarn_insurance/ticdata20001.csv")
+test<-rio::import("C:/Academic/Capstone/capstone_caravarn_insurance/ticeval2000.csv")
+
+```
+
+Column
+-------------------------------------
+### Correlation Plot
+
+```{r pressure, echo=FALSE}
+
+data_cor<-data_original[,c("X1","X5","X3","X7","X9","X10","X12", "X13","X15","X16","X25","X30","X31","X32","X34","X35","X36")]
+
+M<-as.matrix(cor(data_cor))
+
+corrplot(M, method="color", type="lower", order="hclust", tl.col="black", tl.srt=45,  number.cex = .7, diag=FALSE)
+```
+
